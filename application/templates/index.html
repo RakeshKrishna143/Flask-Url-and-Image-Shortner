@@ -1,0 +1,62 @@
+<form action="your-url" method="post">
+    <fieldset>
+        <legend>Url shortner</legend>
+        {% for message in get_flashed_messages()%}
+            <span>{{message}}</span>
+        {% endfor %}
+
+        {{form1.hidden_tag()}}
+        <p>
+            {{form1.url.label}}
+            {{form1.url()}}
+            {% for error in form1.url.errors %}
+                <span>{{error}}</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{form1.code.label}}
+            {{form1.code()}}
+            {% for error in form1.code.errors %}
+                <span>{{error}}</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{form1.submit()}}
+        </p>
+    </fieldset>
+
+</form>
+<form action="your-url" method="post" enctype="multipart/form-data">
+    <fieldset>
+        <legend>Image shortner</legend>
+        {{form2.hidden_tag()}}
+        <p>
+            {{form2.file.label}}
+            {{form2.file()}}
+            {% for error in form2.file.errors %}
+                <span>{{error}}</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{form2.code.label}}
+            {{form2.code()}}
+            {% for error in form2.code.errors %}
+                <span>{{error}}</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{form2.submit()}}
+        </p>
+    </fieldset>
+
+</form>
+{% if codes %}
+<h2>Codes created are </h2>
+<ul>
+    {% for code in codes %}
+        <a href="{{url_for('return_to_url',code=code)}}">
+            <li>{{code}}</li>
+        </a>
+    {% endfor %}
+</ul>
+{% endif %}
